@@ -24,7 +24,12 @@ async function handleUserLogin(req,res){
     // const sessionId = uuidv4(); stateful auth
     // setUser(sessionId,user) stateful auth
     const token = setUser(user)
-    res.cookie('uid',token)
+    res.cookie('uid',token,{
+        httpOnly: true,
+        secure: true,        // required for HTTPS
+        sameSite: 'Lax',     // or 'None' if cross-site (then also need HTTPS)
+        maxAge: 24 * 60 * 60 * 1000, // optional: 1 day
+      })
 
     return res.redirect('/')
 
