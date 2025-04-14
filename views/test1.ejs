@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; background-color: #f3f4f6; margin: 0; padding: 40px;">
+
+    <div
+        style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 0 12px rgba(0,0,0,0.1);">
+        <h1 style="text-align: center; color: #1f2937;">URL Shortener</h1>
+
+        <form action="/url" method="POST" style="margin-top: 30px;">
+            <label for="test1" style="display: block; margin-bottom: 8px; font-weight: bold;">Enter Your Full URL including http or https format</label>
+            <input type="text" name="url" id="test1" required       pattern="https?://.+"
+                style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 10px; margin-bottom: 16px;" />
+            <button type="submit"
+                style="width: 100%; padding: 12px; background-color: #3b82f6; color: white; border: none; border-radius: 10px; cursor: pointer;">
+                Generate
+            </button>
+        </form>
+
+        <% if (locals.shortId) { %>
+            <div
+                style="margin-top: 20px; padding: 15px; background-color: #ecfdf5; border: 1px solid #10b981; border-radius: 10px;">
+                <p style="margin: 0;">✅ Successfully Created Short code:
+                    <strong>
+                        <%= shortId %>
+                    </strong>
+                </p>
+                <p style="margin-top: 10px;">
+                    <a href="http://localhost:3001/" style="color: #2563eb; text-decoration: none;">➡️ Move to Home
+                        Page for List</a>
+                </p>
+            </div>
+            <% } %>
+
+                <% if (locals.url) { %>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 30px;">
+                        <thead>
+                            <tr style="background-color: #e5e7eb;">
+                                <th style="padding: 10px; text-align: left;">S.N</th>
+                                <th style="padding: 10px; text-align: left;">Short ID</th>
+                                <th style="padding: 10px; text-align: left;">Shortened Link</th>
+                                <th style="padding: 10px; text-align: left;">Original URL</th>
+                                <th style="padding: 10px; text-align: left;">Total Clicks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <p style="margin-top: 25px;">Welcome- <em>  <%= name  %></em></p>
+                           <form action="/logout" method="GET">
+                            <button type="submit">Log out!</button>
+                           </form>
+                            <% url.forEach((a,index)=> { %>
+                                <tr style="border-bottom: 1px solid #d1d5db;">
+                                    <td style="padding: 10px;">
+                                        <%= index+1 %>
+                                    </td>
+                                    <td style="padding: 10px;">
+                                        <%= a.shortID %>
+                                    </td>
+                                    <td style="padding: 10px;">
+                                        <a href="http://localhost:3001/url/<%= a.shortID %>" target="_blank"
+                                            style="color: #2563eb; text-decoration: none;">
+                                            http://localhost:3001/url/<%= a.shortID %>
+                                        </a>
+                                    </td>
+                                    <td style="padding: 10px;">
+                                        <%= a.reDirectUrl %>
+                                    </td>
+                                    <td style="padding: 10px;">
+                                        <%= a.visitHistory.length %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                    <% } %>
+    </div>
+
+</body>
+
+</html>

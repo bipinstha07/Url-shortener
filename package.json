@@ -1,0 +1,25 @@
+{
+  "name": "shortener",
+  "version": "1.0.1",
+  "description": "URL shortener Project by Bipin Shrestha ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bipin Shrestha",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
+    "moment": "^2.30.1",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.2",
+    "nanoid": "^5.1.5",
+    "nodemon": "^3.1.9",
+    "shortid": "^2.2.17",
+    "uuid": "^11.1.0"
+  }
+}

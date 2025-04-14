@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+<ul>
+    <% url.forEach(a => { %>
+        <li>
+          Shorted link: <a href="http://localhost:3001/url/<%= a.shortID %>">
+            http://localhost:3001/url/<%= a.shortID %>
+        </a>
+          <br>
+          Redirection link: <%= a.reDirectUrl  %>
+          <br>
+          Total Cicks: <%= a.visitHistory.length %>
+          <br><br>
+          <!-- Access the shortID property -->
+        </li>
+    <% }) %>
+</ul>
+</body>
+</html>
