@@ -9,7 +9,7 @@ const routera = require('./routes/user')
 const cookieParser = require('cookie-parser');
 //Install cookie parser to use this
 
-const { restrict, checkAuth } = require('./middleware/auth')
+const { restrict,roleRestrict } = require('./middleware/auth')
 // connectMongodb('mongodb://localhost:27017/short-url')
 connectMongodb('mongodb+srv://bipinshrestha830:KcnGC3WJgsYkwxEv@cluster0.dkesjvs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 
@@ -23,23 +23,27 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
 //cookie parser
 
-app.use('/url', restrict, router)
+
+app.use('/url',restrict, router)
 
 // Get all USer
-app.get('/test', async (req, res) => {
+app.get('/test',restrict,roleRestrict(["admin"]), async (req, res) => {
+    console.log("middleware")
     const allUrl = await URL.find({})
     return res.render('home', {
         url: allUrl,
     })
 })
 
-app.get('/', checkAuth, async (req, res) => {
+app.get('/',restrict, async (req, res) => {
     if (!req.user) return res.redirect('/login')
     const allUrl = await URL.find({ createdBy: req.user._id })
     const user = req.user.name
+    const role = req.user.role
     return res.render('test1', {
         url: allUrl,
-        name: user
+        name: user,
+        role:role
 
     })
 })

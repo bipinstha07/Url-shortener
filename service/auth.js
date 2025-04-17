@@ -6,7 +6,10 @@ function setUser(user){
     return jwt.sign({
         _id:user._id,
         name:user.name,
-        email:user.email
+        email:user.email,
+        role:user.role
+        // Add in token 
+        
     },secret)
     // sessionIdMap.set(id,user) stateful auth
 }
